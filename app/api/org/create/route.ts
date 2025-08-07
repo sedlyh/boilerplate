@@ -10,7 +10,11 @@ import * as dynamoose from 'dynamoose'
 export async function POST(req: NextRequest) {
     const { authorized, response, user } = requireAuth(req)
 
-    if (!authorized) return response
+
+
+    if (!authorized || !user ) return response
+
+    const resolvedUser = await user
 
     const now = new Date().toISOString()
     const { orgName } = await req.json()
@@ -27,7 +31,7 @@ export async function POST(req: NextRequest) {
             .beginsWith("ORG#")
             .and()
             .where("SK")
-            .eq(`USER#${user?.id}`)
+            .eq(`USER#${resolvedUser.id}`)
             .exec();
 
         if (existingOrgMembership.length > 0) {
@@ -51,9 +55,9 @@ export async function POST(req: NextRequest) {
             User.transaction.create(
                 {
                     PK: `ORG#${orgId}`,
-                    SK: `USER#${user?.id}`,
+                    SK: `USER#${resolvedUser.id}`,
                     type: 'User',
-                    email: user?.email,
+                    email: resolvedUser.email,
                     name: '',
                     joinedAt: now,
                 }
@@ -61,7 +65,7 @@ export async function POST(req: NextRequest) {
             Membership.transaction.create(
                 {
                     PK: `ORG#${orgId}`,
-                    SK: `MEMBERSHIP#USER#${user?.id}`,
+                    SK: `MEMBERSHIP#USER#${resolvedUser.id}`,
                     type: 'UserOrg',
                     role: 'OrgAdmin',
                     permissions: ['create_project', 'invite_user'],
@@ -78,7 +82,7 @@ export async function POST(req: NextRequest) {
             ),
             Membership.transaction.create(
                 {
-                    PK: `USER#${user?.id}`,
+                    PK: `USER#${resolvedUser.id}`,
                     SK: `MEMBERSHIP#TEAM#${teamId}`,
                     type: 'UserTeam',
                     role: 'Lead',
