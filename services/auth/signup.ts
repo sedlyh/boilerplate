@@ -16,6 +16,8 @@ export async function signup({ email, password, username }: signupProps) {
         throw new Error("COGNITO_CLIENT_ID is not set in environment variables.");
     }
 
+    console.log("DEBUG: COGNITO_CLIENT_ID:", process.env.COGNITO_CLIENT_ID);
+
     const signUpCommand = new SignUpCommand({
         ClientId: clientId,
         Username: email,
