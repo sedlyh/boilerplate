@@ -1,3 +1,5 @@
+'use server'
+
 import { NextRequest, NextResponse } from "next/server";
 import { signup } from "@/services/auth/signup";
 
