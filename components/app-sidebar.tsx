@@ -4,9 +4,8 @@ import * as React from "react"
 import {
   Home,
   Folder,
-  LifeBuoy,
   Settings,
-  ShieldCheck, User2,
+   User2,
   ChevronUp, UsersIcon,
 } from "lucide-react";
 
@@ -18,17 +17,13 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
   SidebarFooter,
-  SidebarMenuItem, SidebarMenuSkeleton,
+  SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Image from "next/image";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {usePathname, useRouter} from "next/navigation";
-import { join } from "path"
-
 
 
 export default function LogoutButton() {
@@ -103,6 +98,8 @@ function SidebarItemTree({ item }: { item: NavItem }) {
   const Icon = item.icon
   const pathname = usePathname()
 
+
+
   const fullHref = item.href.startsWith("/")
       ? item.href
       : `${pathname}/${item.href}`
@@ -116,7 +113,7 @@ function SidebarItemTree({ item }: { item: NavItem }) {
           </a>
         </SidebarMenuButton>
 
-        {item.items?.length > 0 && (
+        {item.items && item.items.length > 0 && (
             <SidebarMenuSub>
               <div className="space-y-1">
                 {item.items.map((subitem) => (

@@ -4,10 +4,16 @@ import { motion, MotionValue } from "motion/react";
 import React from "react";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import { Easing } from "framer-motion";
 
-const transition = {
+
+interface transitionType {
+    duration: number,
+    ease: Easing | Easing[] | undefined,}
+
+const transition: transitionType = {
   duration: 0,
-  ease: "linear",
+  ease: "linear" as Easing,
 };
 
 export const GoogleGeminiEffect = ({

@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth/requireAuth'
 
 export async function GET(req: NextRequest) {
-    const { authorized, user, response } = requireAuth(req)
-    if (!authorized) return response
+    const { authorized, user, response } = await  requireAuth(req)
+    if (!authorized || !user) return response
+
+    const resolvedUser = await user
 
 
     if (req.headers.get('x-token-invalid')) {
@@ -11,8 +13,8 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json({
-        id: user?.id,
-        email: user?.email,
-        roles: user?.roles,
+        id: resolvedUser.id,
+        email: resolvedUser.email,
+        roles: resolvedUser.roles,
     })
 }

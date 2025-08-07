@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import {ArrowUpDown, DeleteIcon, TrashIcon} from "lucide-react"
+import {ArrowUpDown,  } from "lucide-react"
 import { MoreHorizontal } from "lucide-react"
 import {
     AlertDialog,
@@ -26,7 +26,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {useState} from "react";
 import {Badge} from "@/components/ui/badge";
-import {updateUserGroup} from "@/lib/auth/updateUserGroup";
 import {clsx} from "clsx";
 
 
@@ -58,49 +57,8 @@ export async function deleteUser(userId: string) {
     }
 }
 
-const handleAddGroup = async (username: string,  setTableData: React.Dispatch<React.SetStateAction<Users[]>>) => {
-    try {
+// handle group add and removal in progress ------------------------- reference file ------------------- not used yet
 
-        const result = await updateUserGroup({
-            username: username,
-            action: "add",
-            groupName: "admin",
-        });
-
-        console.log("Group added:", result);
-
-        setTableData(prev =>
-            prev.map(user =>
-                user.SK === username
-                    ? { ...user, roles: [...user.roles, "admin"] }
-                    : user
-            )
-        );
-    } catch (err) {
-        console.error("Group update error:", err);
-    }
-};
-const handleRemoveGroup = async (username: string, setTableData: React.Dispatch<React.SetStateAction<Users[]>>) => {
-    try {
-
-        const result = await updateUserGroup({
-            username: username,
-            action: "remove",
-            groupName: "admin",
-        });
-
-        console.log("Group removed:", result);
-        setTableData(prev =>
-            prev.map(user =>
-                user.SK === username
-                    ? { ...user, roles: user.roles.filter(role => role !== "admin") }
-                    : user
-            )
-        );
-    } catch (err) {
-        console.error("Group update error:", err);
-    }
-};
 
 export const createColumns = (setTableData: React.Dispatch<React.SetStateAction<Users[]>>): ColumnDef<Users>[] => [
     {
@@ -153,13 +111,12 @@ export const createColumns = (setTableData: React.Dispatch<React.SetStateAction<
                         </AlertDialog>
                         <DropdownMenuItem
                             disabled={user.roles.includes("admin")}
-                            onClick={() => handleAddGroup(user.SK, setTableData)}
+
                         >
                             Promote User
                         </DropdownMenuItem>
                         <DropdownMenuItem
                             disabled={!user.roles.includes("admin")}
-                            onClick={() => handleRemoveGroup(user.SK, setTableData)}
                         >
                             Demote User
                         </DropdownMenuItem>

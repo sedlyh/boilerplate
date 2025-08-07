@@ -1,5 +1,7 @@
 import {
-    ConfirmSignUpCommand
+    ConfirmSignUpCommand,
+    CodeMismatchException,
+    ExpiredCodeException
 } from "@aws-sdk/client-cognito-identity-provider";
 import { cognito } from "@/lib/auth/cognito";
 
@@ -8,7 +10,7 @@ interface confirmSignupProps {
     code: string;
 }
 
-export async function confirmSignup({ email, code } : confirmSignupProps) {
+export async function confirmSignup({ email, code }: confirmSignupProps) {
     const command = new ConfirmSignUpCommand({
         ClientId: process.env.COGNITO_CLIENT_ID,
         Username: email,
@@ -18,11 +20,10 @@ export async function confirmSignup({ email, code } : confirmSignupProps) {
     try {
         const response = await cognito.send(command);
         return response;
-
     } catch (err) {
-        if (err.name === "CodeMismatchException") {
+        if (err instanceof CodeMismatchException) {
             throw new Error("Invalid confirmation code");
-        } else if (err.name === "ExpiredCodeException") {
+        } else if (err instanceof ExpiredCodeException) {
             throw new Error("Confirmation code expired");
         }
         throw err;
