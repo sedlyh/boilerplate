@@ -1,6 +1,5 @@
 import {
     SignUpCommand,
-    AdminConfirmSignUpCommand
 } from "@aws-sdk/client-cognito-identity-provider";
 import { cognito } from "@/lib/auth/cognito";
 
@@ -11,8 +10,14 @@ interface signupProps {
 }
 
 export async function signup({ email, password, username }: signupProps) {
+    const clientId = process.env.COGNITO_CLIENT_ID;
+
+    if (!clientId) {
+        throw new Error("COGNITO_CLIENT_ID is not set in environment variables.");
+    }
+
     const signUpCommand = new SignUpCommand({
-        ClientId: process.env.COGNITO_CLIENT_ID,
+        ClientId: clientId,
         Username: email,
         Password: password,
         UserAttributes: [
