@@ -10,13 +10,13 @@ interface signupProps {
 }
 
 export async function signup({ email, password, username }: signupProps) {
-    const clientId = process.env.COGNITO_CLIENT_ID;
+    const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
 
     if (!clientId) {
         throw new Error("COGNITO_CLIENT_ID is not set in environment variables.");
     }
 
-    console.log("DEBUG: COGNITO_CLIENT_ID:", process.env.COGNITO_CLIENT_ID);
+    console.log("DEBUG: COGNITO_CLIENT_ID:", process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID);
 
     const signUpCommand = new SignUpCommand({
         ClientId: clientId,

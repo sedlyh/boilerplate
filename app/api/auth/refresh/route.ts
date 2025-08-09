@@ -15,7 +15,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 
     try {
         const command = new InitiateAuthCommand({
-            ClientId: process.env.COGNITO_CLIENT_ID,
+            ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
             AuthFlow: 'REFRESH_TOKEN_AUTH',
             AuthParameters: {
                 REFRESH_TOKEN: refreshToken,

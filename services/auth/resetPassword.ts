@@ -11,7 +11,7 @@ export async function resetPassword({
     newPassword: string;
 }) {
     const command = new ConfirmForgotPasswordCommand({
-        ClientId: process.env.COGNITO_CLIENT_ID!,
+        ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
         Username: email,
         ConfirmationCode: code,
         Password: newPassword,

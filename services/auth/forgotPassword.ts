@@ -3,7 +3,7 @@ import { cognito } from "@/lib/auth/cognito";
 
 export async function forgotPassword(email: string) {
     const command = new ForgotPasswordCommand({
-        ClientId: process.env.COGNITO_CLIENT_ID!,
+        ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
         Username: email,
     });
 

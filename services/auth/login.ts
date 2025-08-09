@@ -11,7 +11,7 @@ interface loginProps {
 
 export async function login({ email, password }: loginProps) {
     const authCommand = new InitiateAuthCommand({
-        ClientId: process.env.COGNITO_CLIENT_ID,
+        ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
         AuthFlow: "USER_PASSWORD_AUTH",
         AuthParameters: {
             USERNAME: email,

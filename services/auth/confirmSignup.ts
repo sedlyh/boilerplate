@@ -12,7 +12,7 @@ interface confirmSignupProps {
 
 export async function confirmSignup({ email, code }: confirmSignupProps) {
     const command = new ConfirmSignUpCommand({
-        ClientId: process.env.COGNITO_CLIENT_ID,
+        ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
         Username: email,
         ConfirmationCode: code,
     });
