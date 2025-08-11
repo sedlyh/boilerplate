@@ -1,7 +1,7 @@
 'use server';
 import 'server-only';
 import { cookies } from 'next/headers';
-import {verifyToken} from "@/middleware";
+import {verifyToken} from "@/lib/auth/verifyToken";
 
 export type ServerUser = {
     id: string;

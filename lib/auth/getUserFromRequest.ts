@@ -1,4 +1,4 @@
-import { verifyToken } from '@/middleware'
+import { verifyToken } from '@/lib/auth/verifyToken'
 import { NextRequest } from 'next/server'
 
 export async function getUserFromRequest(req: NextRequest) {
