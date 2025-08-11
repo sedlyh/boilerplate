@@ -1,3 +1,6 @@
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 import { redirect } from "next/navigation";
 import { getServerUser } from "@/lib/auth/getServerUser"; // whatever you use to read the user on the server
 import { ensureOrgForUser } from "@/lib/org/ensure";

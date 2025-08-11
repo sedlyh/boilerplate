@@ -1,7 +1,8 @@
 'use server'
 
-import * as dynamoose from "dynamoose";
+import 'server-only';
 import { v4 as uuidv4 } from "uuid";
+import dynamoose from "@/lib/dynamoose-config"
 import { Org } from "@/models/Org";
 import { User } from "@/models/User";
 import { Membership } from "@/models/Membership";
@@ -46,10 +47,9 @@ export async function ensureOrgForUser(userId: string, email: string, orgName?: 
                 orgId,
                 createdAt: now
             },
-            {
-                condition: new dynamoose.Condition()
-                    .where("PK").not().exists()
+            { condition: new dynamoose.Condition().attribute('PK').not().exists()
             }
+
         ),
         Org.transaction.create(
             {
