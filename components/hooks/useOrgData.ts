@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import { getOrg } from "@/services/getOrg"
-import { getUsers } from '@/services/getUsers'
-import { getTeams } from "@/services/getTeams"
-import { getProject } from "@/services/getProjects"
+import { getOrg } from "@/services/dash/getOrg"
+import { getUsers } from '@/services/dash/getUsers'
+import { getTeams } from "@/services/dash/getTeams"
+import { getProject } from "@/services/dash/getProjects"
 
 interface ProjectMetrics {
     total: number

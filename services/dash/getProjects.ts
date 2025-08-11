@@ -2,7 +2,7 @@
 "use server"
 
 import {Project} from "@/models/Project"
-import {getTeams} from "@/services/getTeams";
+import {getTeams} from "@/services/dash/getTeams";
 
 export const getProject = async (orgId: string) => {
     const teams = await getTeams(orgId)

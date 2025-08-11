@@ -11,6 +11,7 @@ const MembershipSchema = new Schema({
     },
     type: String,  // 'UserOrg' or 'UserTeam'
     role: String,  // 'OrgAdmin', 'Member', 'Lead', etc.
+    orgId: String,
     permissions: {
         type: Array,
         schema: [String],
