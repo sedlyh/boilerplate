@@ -7,7 +7,9 @@ import { ensureOrgForUser } from "@/lib/org/ensure";
 
 export default async function WelcomePage() {
     const user = await getServerUser(); // must be server-side; no cookies needed here
-    if (!user) throw new Error("Not authenticated");
+    if (!user){
+        redirect('/auth/login')
+    }
 
     const { id, email } = user;
     const { orgId } = await ensureOrgForUser(id, email, "Acme Inc.");
