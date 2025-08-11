@@ -13,4 +13,4 @@ const IssueSchema = new Schema({
     createdAt: String,
 })
 
-export const IssueModel = model(process.env.DYNAMODB_TABLE!, IssueSchema)
+export const IssueModel = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, IssueSchema)

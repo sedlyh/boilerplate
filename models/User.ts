@@ -22,4 +22,4 @@ const usersSchema = new Schema({
     joinedAt: String,
 });
 
-export const User = model(process.env.DYNAMODB_TABLE!, usersSchema);
+export const User = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, usersSchema);

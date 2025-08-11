@@ -17,4 +17,4 @@ const OrgSchema = new Schema({
     createdAt: String,
 })
 
-export const Org = model(process.env.DYNAMODB_TABLE!, OrgSchema)
+export const Org = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, OrgSchema)

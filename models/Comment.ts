@@ -9,4 +9,4 @@ const CommentSchema = new Schema({
     timestamp: String,
 })
 
-export const CommentModel = model(process.env.DYNAMODB_TABLE!, CommentSchema)
+export const CommentModel = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, CommentSchema)

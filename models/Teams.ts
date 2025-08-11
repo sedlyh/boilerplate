@@ -17,4 +17,4 @@ const TeamsSchema = new Schema({
     createdAt: String,
 })
 
-export const Team = model(process.env.DYNAMODB_TABLE!, TeamsSchema)
+export const Team = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, TeamsSchema)

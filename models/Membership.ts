@@ -19,4 +19,4 @@ const MembershipSchema = new Schema({
     },
 })
 
-export const Membership = model(process.env.DYNAMODB_TABLE!, MembershipSchema)
+export const Membership = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, MembershipSchema)

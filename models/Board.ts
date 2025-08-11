@@ -13,4 +13,4 @@ const BoardSchema = new Schema({
     createdAt: String,
 })
 
-export const BoardModel = model(process.env.DYNAMODB_TABLE!, BoardSchema)
+export const BoardModel = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, BoardSchema)

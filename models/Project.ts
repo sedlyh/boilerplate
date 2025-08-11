@@ -11,4 +11,4 @@ const ProjectSchema = new Schema({
     visibility: { type: String, default: 'team' }, // or 'org', 'private'
 })
 
-export const Project = model(process.env.DYNAMODB_TABLE!, ProjectSchema)
+export const Project = model(process.env.NEXT_PUBLIC_DYNAMODB_TABLE!, ProjectSchema)

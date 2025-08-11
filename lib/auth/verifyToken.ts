@@ -1,7 +1,7 @@
 import { jwtVerify, createRemoteJWKSet, errors as joseErrors } from 'jose'
 
-const region = process.env.MY_AWS_REGION;
-const userPoolId = process.env.COGNITO_USER_POOL_ID; // prefer NON-public var; it's not secret but clearer
+const region = process.env.NEXT_PUBLIC_MY_AWS_REGION;
+const userPoolId = process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID; // prefer NON-public var; it's not secret but clearer
 if (!region || !userPoolId) {
     // Log once at startup so you catch bad prod config immediately
     console.error('Missing MY_AWS_REGION or COGNITO_USER_POOL_ID in env');

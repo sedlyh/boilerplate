@@ -5,7 +5,7 @@ import { jwtVerify, createRemoteJWKSet } from "jose";
  * The URL is constructed using the AWS region and Cognito User Pool ID from environment variables.
  */
 const jwks = createRemoteJWKSet(
-    new URL(`https://cognito-idp.${process.env.MY_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID}/.well-known/jwks.json`)
+    new URL(`https://cognito-idp.${process.env.NEXT_PUBLIC_MY_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID}/.well-known/jwks.json`)
 );
 
 /**
@@ -18,7 +18,7 @@ export async function verifyAccessToken(token: string) {
     try {
         // Verify the token using the JWKS and issuer
         const { payload } = await jwtVerify(token, jwks, {
-            issuer: `https://cognito-idp.${process.env.MY_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID}`,
+            issuer: `https://cognito-idp.${process.env.NEXT_PUBLIC_MY_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID}`,
         });
 
         return payload; // contains sub, email, etc.
